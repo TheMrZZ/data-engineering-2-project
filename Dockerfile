@@ -1,0 +1,22 @@
+FROM python:3
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+WORKDIR /usr/src/app/backend
+
+RUN [ "python", "./test_classifier.py" ]
+RUN [ "python", "./test_integration.py" ]
+
+WORKDIR /usr/src/app
+
+RUN chmod +x ./start.sh
+
+EXPOSE 8080
+EXPOSE 5000
+
+CMD [ "./start.sh" ]

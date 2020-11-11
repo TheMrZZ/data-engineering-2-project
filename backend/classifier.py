@@ -1,6 +1,5 @@
 from typing import Literal
 
-from sklearn.metrics import accuracy_score
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 classifier = SentimentIntensityAnalyzer()
@@ -26,22 +25,26 @@ def predict(text: str) -> Sentiment:
 
 def benchmark_model(verbose=True):
     """ Test the Vader model on the Tweets dataset. Returns the accuracy. """
-    scores = []
-    predicted_scores = []
+
+    total = 0
+    correct = 0
 
     with open('tweets_GroundTruth.txt') as f:
         for line in f.readlines():
             _, score, text = line.strip().split('\t')
 
             score = float(score)
-            predicted_score = predict(text)
+            sentiment = get_sentiment_from_compound(score)
+            predicted_sentiment = predict(text)
 
-            scores.append(get_sentiment_from_compound(score))
-            predicted_scores.append(predicted_score)
-
-    accuracy = accuracy_score(scores, predicted_scores)
+            total += 1
+            if sentiment == predicted_sentiment:
+                correct += 1
+    
+    accuracy = correct / total
     if verbose:
         print(f'Accuracy score: {accuracy:.2%}')
+
     return accuracy
 
 
