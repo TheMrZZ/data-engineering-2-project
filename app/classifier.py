@@ -24,8 +24,8 @@ def predict(text: str) -> Sentiment:
     return get_sentiment_from_compound(predictions['compound'])
 
 
-def benchmark_model():
-    """ Test the Vader model on the Tweets dataset. """
+def benchmark_model(verbose=True):
+    """ Test the Vader model on the Tweets dataset. Returns the accuracy. """
     scores = []
     predicted_scores = []
 
@@ -39,7 +39,10 @@ def benchmark_model():
             scores.append(get_sentiment_from_compound(score))
             predicted_scores.append(predicted_score)
 
-    print(f'Accuracy score: {accuracy_score(scores, predicted_scores):.2%}')
+    accuracy = accuracy_score(scores, predicted_scores)
+    if verbose:
+        print(f'Accuracy score: {accuracy:.2%}')
+    return accuracy
 
 
 def main():
