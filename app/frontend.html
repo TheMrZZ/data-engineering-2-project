@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Sentence sentiment classifier</title>
+    <script>
+      function setResult(result) {
+        document.getElementById('result').innerText = result
+      }
+
+      async function onInputChange() {
+        const value = document.getElementById('sentence').value
+
+        if (!value.length) {
+          setResult('')
+          return
+        }
+
+        const response = await fetch('http://localhost:5000/classify_sentence', {
+          method: 'POST',
+          body: JSON.stringify({
+            sentence: value
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        const responseValue = await response.json()
+
+        setResult(responseValue.sentiment)
+      }
+    </script>
 </head>
 <body>
-$END$
+<!-- Input -->
+<label for="sentence"> Enter the sentence you want to classify:</label>
+<input type="text" id="sentence" oninput="onInputChange()">
+
+<!-- Result -->
+<div id="result"/>
 </body>
 </html>

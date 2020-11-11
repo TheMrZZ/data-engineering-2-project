@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from classifier import predict
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/classify_sentence', methods=['POST'])
@@ -10,7 +12,7 @@ def classify_sentence():
     text = request.json['sentence']
 
     return jsonify({
-        "sentiment": predict(text)
+        'sentiment': predict(text)
     })
 
 
