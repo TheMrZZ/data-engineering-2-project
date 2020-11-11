@@ -9,7 +9,10 @@ COPY . .
 
 WORKDIR /usr/src/app/backend
 
+# Run unit tests
 RUN [ "python", "./test_classifier.py" ]
+
+# Run integration tests
 RUN [ "python", "./test_integration.py" ]
 
 WORKDIR /usr/src/app
