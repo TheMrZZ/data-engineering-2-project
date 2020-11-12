@@ -1,5 +1,8 @@
 # Sentiment Analysis Application
 
+## Link to Trello
+[https://trello.com/b/GbuQnmqP/projet](https://trello.com/b/GbuQnmqP/projet)
+
 ## Run the docker image
 
 To run the service, run the following command:
