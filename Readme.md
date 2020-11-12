@@ -4,7 +4,7 @@
 
 To run the service, run the following command:
 ```
-docker run -p 8080:8080 -p 5000:5000 themrzz/de2-project:firstimage
+docker run -p 8080:8080 -p 5000:5000 themrzz/de2-project:latest
 ```
 
 This will run:
