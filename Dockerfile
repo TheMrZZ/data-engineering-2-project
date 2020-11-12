@@ -17,6 +17,8 @@ RUN [ "python", "./test_integration.py" ]
 
 WORKDIR /usr/src/app
 
+RUN sed -i "s/localhost/host.docker.internal/g" frontend/index.html
+
 RUN chmod +x ./start.sh
 
 EXPOSE 8080
